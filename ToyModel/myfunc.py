@@ -68,9 +68,10 @@ def make_simple_graph(origin, N):
 
     return simple_graph
 
-def make_itinerary(demand_matrix, airline_network, distance_matrix):
+def booking_dynamics(demand_matrix, airline_network, distance_matrix):
 
-
+    rows, cols = demand_matrix.shape
+    N = rows
     failure_matrix = np.zeros((N, N), dtype = np.int64)
     m = np.sum(np.ndarray.flatten(demand_matrix))
     n_satisfied = 0
@@ -100,6 +101,9 @@ def make_itinerary(demand_matrix, airline_network, distance_matrix):
                 midpoint2 = s_paths[r][u + 1]
                 airline_network[midpoint1][midpoint2] -= 1
                 tot_dist += distance_matrix[midpoint1][midpoint2]
+                #################################################
+                # should think about a better distance measure
+                #################################################
             n_satisfied += 1
 
         except:
