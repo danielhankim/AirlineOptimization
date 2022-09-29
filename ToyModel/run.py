@@ -21,12 +21,12 @@ for P in P_list:
     list_of_wasted = []
     list_of_distance = []
     for i in range(n_sample):
-        demand_matrix = make_demand_matrix(N, m)
-        distance_matrix = make_distance_matrix(N)
-        airline_nw = make_airline_network(N, P, c)
+        demand_matrix = myfunc.make_demand_matrix(N, m)
+        distance_matrix = myfunc.make_distance_matrix(N)
+        airline_nw = my_func.make_airline_network(N, P, c)
 
         n_satisfied, n_unsatisfied, n_empty, tot_dist, failure_matrix = \
-        booking_dynamics(demand_matrix, airline_nw, distance_matrix)
+        my_func.booking_dynamics(demand_matrix, airline_nw, distance_matrix)
 
         list_of_satisfied.append(n_satisfied)
         list_of_unsatisfied.append(n_unsatisfied)
