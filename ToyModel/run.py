@@ -7,7 +7,7 @@ import os
 
 SAVE_PATH = '/home/mk139/WorkSpace/AirlineNW/SaveData/ToyModel/'
 
-n_sample = 500
+n_sample = 100
 N = 100
 P_list = [10, 50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 600, 700, 800]
 c = 20
@@ -37,19 +37,19 @@ for P in P_list:
             print(f"{i}/{n_sample} done...")
 
 
-    with open(SAVE_PATH + f"Satisfied_N{N}_P{P}_c{c}_m{m}.dat") as f:
+    with open(SAVE_PATH + f"Satisfied_N{N}_P{P}_c{c}_m{m}.dat", "a") as f:
         for x in list_of_satisfied:
             f.write("%d\n" %x)
         
-    with open(SAVE_PATH + f"Unsatisfied_N{N}_P{P}_c{c}_m{m}.dat") as f:
+    with open(SAVE_PATH + f"Unsatisfied_N{N}_P{P}_c{c}_m{m}.dat", "a") as f:
         for x in list_of_unsatisfied:
             f.write("%d\n" %x)
 
-    with open(SAVE_PATH + f"Wasted_N{N}_P{P}_c{c}_m{m}.dat") as f:
+    with open(SAVE_PATH + f"Wasted_N{N}_P{P}_c{c}_m{m}.dat", "a") as f:
         for x in list_of_wasted:
             f.write("%d\n" %x)
 
-    with open(SAVE_PATH + f"Distance_N{N}_P{P}_c{c}_m{m}.dat") as f:
+    with open(SAVE_PATH + f"Distance_N{N}_P{P}_c{c}_m{m}.dat", "a") as f:
         for x in list_of_distance:
             f.write("%d\n" %x)
 
