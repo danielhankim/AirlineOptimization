@@ -1,6 +1,6 @@
 import numpy as np
 import networkx as nx
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 
 def make_demand_matrix(N, m, Symmetry = False):
 
@@ -93,7 +93,7 @@ def booking_dynamics(demand_matrix, airline_network, distance_matrix):
         ### step 2: we find available shortest pathes which satisfies the demand
         try:
             ### if there is at least one path, let's make a trip :)
-            s_paths = [p for p in nx.all_shortest_paths(G, source = i, target = j)]
+            s_paths = [p for p in nx.all_shortest_paths(G, source = o, target = d)]
             n_path = len(s_paths)
             r = np.random.randint(n_path)
             for u in range(len(s_paths[r]) - 1):
