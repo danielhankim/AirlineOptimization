@@ -5,7 +5,7 @@ import os
 # Parameters 
 #################
 
-SAVE_PATH = '/home/mk139/WorkSpace/AirlineNW/SaveData/ToyModel/Asyim'
+SAVE_PATH = '/home/mk139/WorkSpace/AirlineNW/SaveData/ToyModel/Asym_Airline'
 
 n_sample = 50
 N = 100
