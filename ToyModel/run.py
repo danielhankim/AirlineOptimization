@@ -1,11 +1,12 @@
 import myfunc
 import os
+import sys
 
 #################
 # Parameters 
 #################
 
-SAVE_PATH = '/home/mk139/WorkSpace/AirlineNW/SaveData/ToyModel/Asym_Airline'
+SAVE_PATH = '/home/mk139/WorkSpace/AirlineNW/SaveData/ToyModel/Sym_Airline/'
 
 n_sample = 50
 N = 100
@@ -24,7 +25,7 @@ for N in N_list:
         for i in range(n_sample):
             demand_matrix = myfunc.make_demand_matrix(N, m)
             distance_matrix = myfunc.make_distance_matrix(N)
-            airline_nw = myfunc.make_airline_network(N, P, c)
+            airline_nw = myfunc.make_airline_network(N, P, c, Symmetry = True)
 
             n_satisfied, n_unsatisfied, n_empty, tot_dist, failure_matrix = \
             myfunc.booking_dynamics(demand_matrix, airline_nw, distance_matrix)
@@ -33,7 +34,9 @@ for N in N_list:
             list_of_unsatisfied.append(n_unsatisfied)
             list_of_wasted.append(n_empty)
             list_of_distance.append(tot_dist)
-
+            if n_empty < 0:
+                # print(f'n_empty = {n_empty}!!!!!')
+                sys.exit(f'n_empty = {n_empty}!!!!!')
             # if i % 100 == 0:
             #     print(f"{i}/{n_sample} done...")
 

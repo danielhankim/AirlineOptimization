@@ -29,9 +29,9 @@ def make_airline_network(N, P, c, Symmetry = False):
         while P > 0:
             i, j = np.random.randint(N, size = 2)
             if i != j:
-                airline_nw[i][j] += (int) (c / 2)
-                airline_nw[j][i] += (int) (c / 2)
-                P -= 1
+                airline_nw[i][j] += c 
+                airline_nw[j][i] += c
+                P -= 2
     
     else:
         while P > 0:
