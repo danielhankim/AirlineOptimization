@@ -61,10 +61,10 @@ def make_simple_graph(origin, N):
     simple_graph = np.zeros((N, N), dtype = np.int64)
 
     for i in range(N):
-        for j in range(i+1, N):
-            if origin[i][j] != 0:
+        for j in range(N):
+            if origin[i][j] > 0:
                 simple_graph[i][j] = 1
-                simple_graph[j][i] = 1
+                # simple_graph[j][i] = 1
 
     return simple_graph
 
