@@ -2,24 +2,24 @@ import numpy as np
 import networkx as nx
 # import matplotlib.pyplot as plt
 
-def make_demand_matrix(N, m, Symmetry = False):
+def make_demand_list(N, m, Symmetry = False):
 
-    matrix = np.zeros((N, N), dtype = np.int64)
+    demand = []
 
     if Symmetry == True:
         while m > 0:
             i, j = np.random.randint(N, size = 2)
             if i != j:
-                matrix[i][j] += 1
-                matrix[j][i] += 1
+                demand.append(list([i, j]))
+                demand.append(list([j, i]))
                 m -= 2
     else:
         while m > 0:
             i, j = np.random.randint(N, size = 2)
             if i != j:
-                matrix[i][j] += 1
+                demand.append(list([i, j]))
                 m -= 1
-    return matrix
+    return demand
 
 def make_airline_network(N, P, c, Symmetry = False):
 
@@ -68,27 +68,30 @@ def make_simple_graph(origin, N):
 
     return simple_graph
 
-def booking_dynamics(demand_matrix, airline_network, distance_matrix):
+def booking_dynamics(demand_list, airline_network, distance_matrix):
 
-    rows, cols = demand_matrix.shape
+    rows, cols = airline_network.shape
     N = rows
     failure_matrix = np.zeros((N, N), dtype = np.int64)
-    m = np.sum(np.ndarray.flatten(demand_matrix))
+    m = len(demand_list)
     n_satisfied = 0
     n_unsatisfied = 0
     tot_dist = 0
 
+    i = 0
     while m > 0:
     
         simple_graph = make_simple_graph(airline_network, N)
-        G = nx.Graph(simple_graph)
+        G = nx.DiGraph(simple_graph)
 
         ### setp 1: we randomly select a passenger's demand
-        while True:
-            o, d = np.random.randint(N, size = 2)
-            if demand_matrix[o][d] > 0:
-                demand_matrix[o][d] -= 1
-                break
+        # while True:
+        #     o, d = np.random.randint(N, size = 2)
+        #     if demand_matrix[o][d] > 0:
+        #         demand_matrix[o][d] -= 1
+        #         break
+        o, d = demand_list[i]
+        i += 1
 
         ### step 2: we find available shortest pathes which satisfies the demand
         try:

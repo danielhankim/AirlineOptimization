@@ -9,26 +9,27 @@ import sys
 SAVE_PATH = '/home/mk139/WorkSpace/AirlineNW/SaveData/ToyModel/Sym_Airline/'
 
 n_sample = 50
-N = 100
+# N = 100
 N_list = [100, 200, 400]
 P_list = [10, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]
 c = 20
 m = 8000
 
 for N in N_list:
+    print(f"N = {N}\n")
     for P in P_list:
-        print(f"P = {P}")
+        print(f"P = {P}\n")
         list_of_satisfied = []
         list_of_unsatisfied = []
         list_of_wasted = []
         list_of_distance = []
         for i in range(n_sample):
-            demand_matrix = myfunc.make_demand_matrix(N, m)
+            demand_list = myfunc.make_demand_list(N, m)
             distance_matrix = myfunc.make_distance_matrix(N)
             airline_nw = myfunc.make_airline_network(N, P, c, Symmetry = True)
 
             n_satisfied, n_unsatisfied, n_empty, tot_dist, failure_matrix = \
-            myfunc.booking_dynamics(demand_matrix, airline_nw, distance_matrix)
+            myfunc.booking_dynamics(demand_list, airline_nw, distance_matrix)
 
             list_of_satisfied.append(n_satisfied)
             list_of_unsatisfied.append(n_unsatisfied)
