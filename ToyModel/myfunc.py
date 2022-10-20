@@ -109,7 +109,7 @@ def booking_dynamics(demand_list, airline_network, distance_matrix):
                 # should think about a better distance measure
                 #################################################
             n_satisfied += 1
-            tot_hop += len(s_paths[r] - 1)
+            tot_hop += (len(s_paths[r]) - 1)
 
         except:
             ### if there is no path, the passenger cannot make a trip :(
