@@ -77,6 +77,7 @@ def booking_dynamics(demand_list, airline_network, distance_matrix):
     n_satisfied = 0
     n_unsatisfied = 0
     tot_dist = 0
+    tot_hop = 0
 
     i = 0
     while m > 0:
@@ -108,6 +109,7 @@ def booking_dynamics(demand_list, airline_network, distance_matrix):
                 # should think about a better distance measure
                 #################################################
             n_satisfied += 1
+            tot_hop += len(s_paths[r] - 1)
 
         except:
             ### if there is no path, the passenger cannot make a trip :(
@@ -117,4 +119,4 @@ def booking_dynamics(demand_list, airline_network, distance_matrix):
 
     n_empty = np.sum(np.ndarray.flatten(airline_network))
 
-    return n_satisfied, n_unsatisfied, n_empty, tot_dist, failure_matrix
+    return n_satisfied, n_unsatisfied, n_empty, tot_dist, failure_matrix, tot_hop
