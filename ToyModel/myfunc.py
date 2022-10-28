@@ -49,7 +49,7 @@ def make_distance_matrix(N):
 
     for i in range(N):
         for j in range(i+1, N):
-            d = np.random.randint(10)
+            d = np.random.randint(low = 1, hight = 11)
             distance_matrix[i][j] = d
             distance_matrix[j][i] = d
  
@@ -118,5 +118,94 @@ def booking_dynamics(demand_list, airline_network, distance_matrix):
         m -= 1
 
     n_empty = np.sum(np.ndarray.flatten(airline_network))
+
+    return n_satisfied, n_unsatisfied, n_empty, tot_dist, failure_matrix, tot_hop
+
+
+
+def new_booking_dynamics(demand_list, airline_network, distance_matrix):
+
+    rows, cols = airline_network.shape
+    N = rows
+    failure_matrix = np.zeros((N, N), dtype = np.int64)
+    m = len(demand_list)
+    n_satisfied = 0
+    n_unsatisfied = 0
+    tot_dist = 0
+    tot_hop = 0
+    path_memory = {}
+
+    
+    while m > 0:
+    
+        simple_graph = make_simple_graph(airline_network, N)
+        G = nx.DiGraph(simple_graph)
+
+        ### Choose OD
+        o, d = demand_list[m-1]
+
+
+        ### Check if we have avialable path used before
+        if (o, d) not in path_memory:
+            ### If there is no path used before, we can find them
+            path_memory[(o, d)] = []
+            
+            try:
+            
+                paths = [p for p in nx.all_shortest_paths(G, source = o, target = d)]
+                path_memory[(o, d)].append(paths)
+
+            except:
+
+                pass
+                # n_unsatisfied += 1
+                # failure_matrix[o][d] += 1
+
+        else: 
+            ### If we haved used them before, we can figure out
+            ### whether we can use them again!
+            ### Still needs to be modified i guess...
+            check_missing = [0 for i in range(len(path_memory[(o, d)]))]
+            for i in range(len(path_memory[(o, d)])):
+                for j in range(len(path_memory[(o, d)][i]) - 1):
+                    I1 = path_memory[(o, d)][i][j]
+                    I2 = path_memory[(o, d)][i][j+1]
+
+                    if G.has_edge(I1, I2) == False:
+                        check_missing[i] = -1
+                        break
+
+            new_path = []
+            for i in range(len(path_memory[(o, d)])):
+                if check_missing[i] == 0:
+                    new_path.append(path_memory[(o, d)][i])
+            path_memory[(o, d)] = new_path
+
+        
+
+        ### Now let's try to make a trip
+        if len(path_memory[(o, d)]) > 0:
+
+            r = np.random.randint(len(path_memory[(o, d)]))
+            for u in range(len(path_memory[(o, d)][r]) - 1):
+                I1 = path_memory[(o, d)][r][u]
+                I2 = path_memory[(o, d)][r][u + 1]
+                airline_network[I1][I2] -= 1
+                tot_dist += distance_matrix[I1][I2]
+                
+            
+            n_satisfied += 1
+            tot_hop += (len(path_memory[(o, d)][r]) - 1)
+
+
+        else:
+
+            n_unsatisfied += 1
+            failure_matrix[o][d] += 1
+
+        m -= 1
+
+    n_empty = np.sum(np.ndarray.flatten(airline_network))
+
 
     return n_satisfied, n_unsatisfied, n_empty, tot_dist, failure_matrix, tot_hop
