@@ -43,7 +43,7 @@ def make_airline_network(N, P, c, Symmetry = False):
     return airline_nw
     
 
-def make_distance_matrix(N):
+def make_distance_matrix(N):    
 
     distance_matrix = np.zeros((N, N), dtype = np.int64)
 
@@ -67,6 +67,36 @@ def make_simple_graph(origin, N):
                 # simple_graph[j][i] = 1
 
     return simple_graph
+
+def make_undirected_graph_OR(origin, N):
+    # make undirected graph based on "OR" rule
+    undirected_graph = np.zeros((N, N), dtype = np.int64)
+
+    for i in range(N):
+        for j in range(i+1, N): # maybe I can modify this later! remove this tag after modification
+            if origin[i][j] > 0 or origin[j][i] > 0:
+                undirected_graph[i][j] = 1
+
+    return undirected_graph
+
+def make_undirected_graph_AND(origin, N):
+    # make undirected graph based on "AND" rule
+    undirected_graph = np.zeros((N, N), dtype = np.int64)
+
+    for i in range(N):
+        for j in range(i+1, N): # maybe I can modify this later! remove this tag after modification
+            if origin[i][j] > 0 and origin[j][i] > 0:
+                undirected_graph[i][j] = 1
+
+    return undirected_graph
+
+def extract_connected_component(undirected_graph):
+    G = nx.Graph(undirected_graph)
+
+    list_of_component_size = [len(c) for c in sorted(nx.connected_components(G), 
+                                key = len, reverse = True)]
+
+    return list_of_component_size
 
 def booking_dynamics(demand_list, airline_network, distance_matrix):
 
@@ -127,7 +157,7 @@ def new_booking_dynamics(demand_list, airline_network, distance_matrix):
 
     rows, cols = airline_network.shape
     N = rows
-    failure_matrix = np.zeros((N, N), dtype = np.int64)
+    # failure_matrix = np.zeros((N, N), dtype = np.int64)
     m = len(demand_list)
     n_satisfied = 0
     n_unsatisfied = 0
@@ -142,6 +172,7 @@ def new_booking_dynamics(demand_list, airline_network, distance_matrix):
         G = nx.DiGraph(simple_graph)
 
         ### Choose OD
+        ### We can change this stochastically when we deal with real demand lists
         o, d = demand_list[m-1]
 
 
@@ -151,12 +182,10 @@ def new_booking_dynamics(demand_list, airline_network, distance_matrix):
             path_memory[(o, d)] = []
             
             try:
-            
                 paths = [p for p in nx.all_shortest_paths(G, source = o, target = d)]
                 path_memory[(o, d)].append(paths)
 
             except:
-
                 pass
                 # n_unsatisfied += 1
                 # failure_matrix[o][d] += 1
@@ -165,6 +194,7 @@ def new_booking_dynamics(demand_list, airline_network, distance_matrix):
             ### If we haved used them before, we can figure out
             ### whether we can use them again!
             ### Still needs to be modified i guess...
+            
             check_missing = [0 for i in range(len(path_memory[(o, d)]))]
             for i in range(len(path_memory[(o, d)])):
                 for j in range(len(path_memory[(o, d)][i]) - 1):
@@ -201,11 +231,14 @@ def new_booking_dynamics(demand_list, airline_network, distance_matrix):
         else:
 
             n_unsatisfied += 1
-            failure_matrix[o][d] += 1
+            # failure_matrix[o][d] += 1
 
         m -= 1
 
     n_empty = np.sum(np.ndarray.flatten(airline_network))
 
 
-    return n_satisfied, n_unsatisfied, n_empty, tot_dist, failure_matrix, tot_hop
+    return n_satisfied, n_unsatisfied, n_empty, tot_dist, tot_hop, airline_network
+
+
+
