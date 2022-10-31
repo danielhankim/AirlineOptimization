@@ -211,7 +211,7 @@ def new_booking_dynamics(demand_list, airline_network, distance_matrix):
                     new_path.append(path_memory[(o, d)][i])
             path_memory[(o, d)] = new_path
 
-        
+        print(f'chosen path:{path_memory[(o, d)]}')
 
         ### Now let's try to make a trip
         if len(path_memory[(o, d)]) > 0:
