@@ -179,6 +179,7 @@ def new_booking_dynamics(demand_list, airline_network, distance_matrix):
         ### Check if we have avialable path used before
         if (o, d) not in path_memory:
             ### If there is no path used before, we can find them
+            print(f'no path memory for (o,d)={o, d}')
             path_memory[(o, d)] = []
             
             try:
