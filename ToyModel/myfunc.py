@@ -49,7 +49,7 @@ def make_distance_matrix(N):
 
     for i in range(N):
         for j in range(i+1, N):
-            d = np.random.randint(low = 1, hight = 11)
+            d = np.random.randint(low = 1, high = 11)
             distance_matrix[i][j] = d
             distance_matrix[j][i] = d
  
@@ -194,7 +194,7 @@ def new_booking_dynamics(demand_list, airline_network, distance_matrix):
             ### If we haved used them before, we can figure out
             ### whether we can use them again!
             ### Still needs to be modified i guess...
-            
+
             check_missing = [0 for i in range(len(path_memory[(o, d)]))]
             for i in range(len(path_memory[(o, d)])):
                 for j in range(len(path_memory[(o, d)][i]) - 1):
