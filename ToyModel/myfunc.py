@@ -167,7 +167,7 @@ def new_booking_dynamics(demand_list, airline_network, distance_matrix):
 
     
     while m > 0:
-    
+        print(f'm = {m}')
         simple_graph = make_simple_graph(airline_network, N)
         G = nx.DiGraph(simple_graph)
 
