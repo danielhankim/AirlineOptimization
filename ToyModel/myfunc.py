@@ -183,8 +183,8 @@ def new_booking_dynamics(demand_list, airline_network, distance_matrix):
             path_memory[(o, d)] = []
             
             try:
-                paths = [p for p in nx.all_shortest_paths(G, source = o, target = d)]
-                path_memory[(o, d)].append(paths)
+                path_memory[(o, d)] = [p for p in nx.all_shortest_paths(G, source = o, target = d)]
+                # path_memory[(o, d)].append(paths)
 
             except:
                 pass
