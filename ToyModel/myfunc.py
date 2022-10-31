@@ -218,7 +218,7 @@ def new_booking_dynamics(demand_list, airline_network, distance_matrix):
 
             r = np.random.randint(len(path_memory[(o, d)]))
 
-            print(f'chosen path:{path_memory[(o, d)]}')
+            print(f'chosen path:{path_memory[(o, d)][r]}')
 
             for u in range(len(path_memory[(o, d)][r]) - 1):
                 I1 = path_memory[(o, d)][r][u]
