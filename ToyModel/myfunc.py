@@ -167,7 +167,7 @@ def new_booking_dynamics(demand_list, airline_network, distance_matrix):
 
     
     while m > 0:
-        print(f'm = {m}')
+        # print(f'm = {m}')
         simple_graph = make_simple_graph(airline_network, N)
         G = nx.DiGraph(simple_graph)
 
@@ -179,7 +179,7 @@ def new_booking_dynamics(demand_list, airline_network, distance_matrix):
         ### Check if we have avialable path used before
         if (o, d) not in path_memory:
             ### If there is no path used before, we can find them
-            print(f'no path memory for (o,d)={o, d}')
+            # print(f'no path memory for (o,d)={o, d}')
             path_memory[(o, d)] = []
             
             try:
@@ -212,14 +212,14 @@ def new_booking_dynamics(demand_list, airline_network, distance_matrix):
                     new_path.append(path_memory[(o, d)][i])
             path_memory[(o, d)] = new_path
 
-        print(f'chosen path:{path_memory[(o, d)]}')
+        # print(f'chosen path:{path_memory[(o, d)]}')
 
         ### Now let's try to make a trip
         if len(path_memory[(o, d)]) > 0:
 
             r = np.random.randint(len(path_memory[(o, d)]))
 
-            print(f'chosen path:{path_memory[(o, d)][r]}')
+            # print(f'chosen path:{path_memory[(o, d)][r]}')
 
             for u in range(len(path_memory[(o, d)][r]) - 1):
                 I1 = path_memory[(o, d)][r][u]
