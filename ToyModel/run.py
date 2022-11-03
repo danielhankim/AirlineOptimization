@@ -17,9 +17,10 @@ n_sample = 1000
 N_list = [200]
 #P_list = [10, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]
 c = 1
-m = int(sys.argv[1])
-P = 4000
-
+#m = int(sys.argv[1])
+m=400
+#P = 4000
+P = int(sys.argv[1])
 
 for N in N_list:
     print(f"N = {N}\n")
