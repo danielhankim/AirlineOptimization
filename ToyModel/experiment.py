@@ -1,3 +1,4 @@
+from cgitb import strong
 import myfunc
 import os
 import numpy as np
@@ -13,7 +14,7 @@ SAVE_PATH = '/home/mk139/WorkSpace/AirlineNW/SaveData/ToyModel/Experiment/'
 
 
 
-n_sample = 1000
+n_sample = 4000
 # N = 100
 N_list = [200]
 #P_list = [10, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]
@@ -51,6 +52,8 @@ for N in N_list:
 
         largest_cc = np.max(connected_component)
         connected_component.remove(largest_cc)
+        if len(connected_component) == 0:
+            connected_component.append(0)
         ########################################################################
 
 
@@ -76,6 +79,11 @@ for N in N_list:
 
         weakly_connected.remove(largest_wcc)
         strongly_connected.remove(largest_scc)
+
+        if len(weakly_connected) == 0:
+            weakly_connected.append(0)
+        if len(strongly_connected) == 0:
+            strongly_connected.append(0)
 
         with open(SAVE_PATH + f"Satisfied_N{N}_P{P}_c{c}_m{m}.dat", "a") as f:
             f.write("%d\n" %n_satisfied)
