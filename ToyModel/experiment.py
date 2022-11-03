@@ -57,7 +57,7 @@ for N in N_list:
         n_satisfied, n_unsatisfied, n_empty, tot_dist, tot_hop, remnant_network = \
         myfunc.new_booking_dynamics(demand_list, airline_nw, distance_matrix)
 
-        remnant_network = myfunc.make_simple_graph(remnant_network)
+        remnant_network = myfunc.make_simple_graph(remnant_network, N)
         G = nx.Digraph(remnant_network)
 
         weakly_connected = [len(c) for c in sorted(
