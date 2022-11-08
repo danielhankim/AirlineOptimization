@@ -1,0 +1,6 @@
+# ignore ALL files in the following directories
+data
+results
+
+
+# ignore ALL files with the following extention 
