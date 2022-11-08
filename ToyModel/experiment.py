@@ -14,9 +14,9 @@ SAVE_PATH = '/home/mk139/WorkSpace/AirlineNW/SaveData/ToyModel/Experiment/'
 
 
 
-n_sample = 4000
+n_sample = 10000
 # N = 100
-N_list = [200]
+N_list = [100]
 #P_list = [10, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]
 c = 1
 #m = int(sys.argv[1])

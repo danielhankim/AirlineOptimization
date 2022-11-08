@@ -6,10 +6,10 @@ import time
 SAVE_PATH = '/home/mk139/WorkSpace/AirlineNW/SaveData/ToyModel/Complexity/'
 
 n_experiment = 1000
-N = 200
+N = 400
 c = 1
-m = 400
-P = 4000
+m = 1600
+P = 40000
 # P = int(sys.argv[1])
 
 
