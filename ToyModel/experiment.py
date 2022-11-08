@@ -9,7 +9,6 @@ import networkx as nx
 # Parameters 
 #################
 
-# SAVE_PATH = '/home/mk139/WorkSpace/AirlineNW/SaveData/ToyModel/Sym_Airline/'
 SAVE_PATH = '/home/mk139/WorkSpace/AirlineNW/SaveData/ToyModel/Experiment/'
 
 
@@ -122,8 +121,6 @@ for N in N_list:
                 f.write("%d\n" %x)
         
         
-        if n_empty < 0:
-            sys.exit(f'n_empty = {n_empty}!!!!!')
 
 
 
