@@ -271,7 +271,7 @@ def new_booking_dynamics_v2(demand_list, airline_network, distance_matrix):
         if (o, d) not in path_memory:
             ### If there is no path used before, we can find them
             # print(f'no path memory for (o,d)={o, d}')
-            # path_memory[(o, d)] = []
+            path_memory[(o, d)] = []
             
             try:
                 path_memory[(o, d)] = [p for p in nx.all_shortest_paths(G, source = o, target = d)]
