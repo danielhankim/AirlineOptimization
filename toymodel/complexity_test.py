@@ -8,14 +8,15 @@ SAVE_PATH = '/home/mk139/WorkSpace/AirlineNW/SaveData/ToyModel/Complexity/'
 n_experiment = 1000
 N = 400
 c = 1
-m = 1600
-P = 40000
+m = 400
+P = 4000
 # P = int(sys.argv[1])
 
 
 
 naive_implementation_time = []
 modified_algorithm_time = []
+
 
 for i in range(n_experiment):
 
@@ -26,7 +27,7 @@ for i in range(n_experiment):
     distance_matrix = myfunc.make_distance_matrix(N)
     airline_nw = myfunc.make_airline_network(N, P, c, Symmetry = True)
 
-    _, _, _, _, _, _ = myfunc.new_booking_dynamics(demand_list, 
+    _, _, _, _, _, _ = myfunc.new_booking_dynamics_v2(demand_list, 
                                                     airline_nw, 
                                                     distance_matrix)
     end = time.time()
