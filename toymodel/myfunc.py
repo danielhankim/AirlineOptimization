@@ -323,7 +323,7 @@ def new_booking_dynamics_v2(demand_list, airline_network, distance_matrix):
                 tot_dist += distance_matrix[I1][I2]
 
                 if airline_network[I1][I2] == 0:
-                    G.remove_dege(I1, I2)
+                    G.remove_edge(I1, I2)
                     change_check = 1
                 
             
