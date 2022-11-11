@@ -9,13 +9,13 @@ import networkx as nx
 # Parameters 
 #################
 
-SAVE_PATH = '/home/mk139/WorkSpace/AirlineNW/SaveData/ToyModel/Experiment/'
+SAVE_PATH = '/home/mk139/WorkSpace/AirlineNW/SaveData/ToyModel/Experiment2/'
 
 
 
-n_sample = 10000
+n_sample = 1000
 # N = 100
-N_list = [100]
+N_list = [200]
 #P_list = [10, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]
 c = 1
 #m = int(sys.argv[1])
@@ -57,7 +57,7 @@ for N in N_list:
 
 
         n_satisfied, n_unsatisfied, n_empty, tot_dist, tot_hop, remnant_network = \
-        myfunc.new_booking_dynamics(demand_list, airline_nw, distance_matrix)
+        myfunc.new_booking_dynamics_v2(demand_list, airline_nw, distance_matrix)
 
         remnant_network = myfunc.make_simple_graph(remnant_network, N)
         G = nx.DiGraph(remnant_network)
