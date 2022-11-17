@@ -27,7 +27,7 @@ for N in N_list:
     print(f"P = {P}\n")
     # list_of_satisfied = []
     # list_of_unsatisfied = []
-    # list_of_wasted = []
+    # list_of_wasted = []∏
     # list_of_distance = []
     # list_of_hop = []
     for i in range(n_sample):
@@ -70,7 +70,7 @@ for N in N_list:
 
         with open(SAVE_PATH + f"Wasted_N{N}_P{P}_c{c}_m{m}.dat", "a") as f:
             f.write("%d\n" %n_empty)
-
+            
         with open(SAVE_PATH + f"Distance_N{N}_P{P}_c{c}_m{m}.dat", "a") as f:
             f.write("%d\n" %tot_dist)
 
