@@ -2,22 +2,22 @@ import numpy as np
 import networkx as nx
 
 
-def make_demand_list(N, m, Symmetry = False):
+def make_demand_list(N, n_passenger, Symmetry = False):
     demand = []
 
     if Symmetry == True:
-        while m > 0:
+        while n_passenger > 0:
             i, j = np.random.randint(N, size = 2)
             if i != j:
                 demand.append(list([i, j]))
                 demand.append(list([j, i]))
-                m -= 2
+                n_passenger -= 2
     else:
-        while m > 0:
+        while n_passenger > 0:
             i, j = np.random.randint(N, size = 2)
             if i != j:
                 demand.append(list([i, j]))
-                m -= 1
+                n_passenger -= 1
     return demand
 
 
@@ -84,7 +84,7 @@ def booking_one_way(demand_list, airline_network, distance_matrix):
 
     N, _ = airline_network.shape
     # failure_matrix = np.zeros((N, N), dtype = np.int64)
-    m = len(demand_list)
+    n_passenger = len(demand_list)
     n_satisfied = 0
     n_unsatisfied = 0
     tot_dist = 0
@@ -95,7 +95,7 @@ def booking_one_way(demand_list, airline_network, distance_matrix):
     simple_graph = make_simple_graph(airline_network, N)
     G = nx.DiGraph(simple_graph)
 
-    while m > 0:
+    while n_passenger > 0:
         
         o, d = demand_list[m - 1]
 
@@ -156,7 +156,7 @@ def booking_one_way(demand_list, airline_network, distance_matrix):
         else:
             n_unsatisfied += 1
             # failure_matrix[o][d] += 1
-        m -= 1
+        n_passenger -= 1
 
     n_empty = np.sum(np.ndarray.flatten(airline_network))
 
@@ -169,7 +169,7 @@ def booking_round_trip(demand_list, airline_network, distance_matrix):
 
     N, _ = airline_network.shape
     # failure_matrix = np.zeros((N, N), dtype = np.int64)
-    m = len(demand_list)
+    n_passenger = len(demand_list)
     n_satisfied = 0
     n_unsatisfied = 0
     tot_dist = 0
@@ -180,9 +180,9 @@ def booking_round_trip(demand_list, airline_network, distance_matrix):
     simple_graph = make_simple_graph(airline_network, N)
     G = nx.DiGraph(simple_graph)
 
-    while m > 0:
+    while n_passenger > 0:
         
-        o, d = demand_list[m - 1]
+        o, d = demand_list[n_passenger - 1]
         
         # Check path memory.
         if (o, d) not in path_memory:
@@ -241,7 +241,7 @@ def booking_round_trip(demand_list, airline_network, distance_matrix):
         else:
             n_unsatisfied += 2
             # failure_matrix[o][d] += 1
-        m -= 2
+        n_passenger -= 2
 
     n_empty = np.sum(np.ndarray.flatten(airline_network))
 
