@@ -232,6 +232,7 @@ def booking_round_trip(demand_list, airline_network, distance_matrix):
 
                 if airline_network[I1][I2] == 0:
                     G.remove_edge(I1, I2)
+                    G.remove_edge(I2, I1)
                     change_check = 1
                 
             n_satisfied += 2
