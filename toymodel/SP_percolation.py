@@ -1,6 +1,7 @@
 import networkx as nx
 import numpy as np
 import os
+import sys
 
 DATA_ROOT = '/home/mk139/WorkSpace/AirlineNW/SaveData/'
 DATA_PATH = os.path.join(DATA_ROOT, 'test_Shortest_Path_Percolation')
