@@ -5,6 +5,10 @@ import numpy as np
 import sys
 import networkx as nx
 
+'''
+For extensive parameter space search
+'''
+
 #################
 # Parameters 
 #################
@@ -13,25 +17,35 @@ SAVE_PATH = '/home/mk139/WorkSpace/AirlineNW/SaveData/ToyModel/Experiment_sym/'
 
 
 
-n_sample = 1000
-# N = 100
-N_list = [200]
+n_sample = 5000
+N = 200
 #P_list = [10, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]
 c = 1
 #m = int(sys.argv[1])
-m = 1600
-#P = 4000
-P = int(sys.argv[1])
+m = int(sys.argv[1])
+P_list = [[600, 700], [800, 1000], [1400, 1600], [2300, 2600], [3600, 4400]]
 
-for N in N_list:
-    print(f"N = {N}\n")
-    print(f"P = {P}\n")
-    # list_of_satisfied = []
-    # list_of_unsatisfied = []
+if m == 100:
+    idx = 0
+    res = 20
+elif m == 200:
+    idx = 1
+    res = 20
+elif m == 400:
+    idx = 2
+    res = 20
+elif m == 800:
+    idx = 3
+    res = 50
+elif m == 1600:
+    idx = 4
+    res = 50
+
+for i in range(n_sample):
     # list_of_wasted = []
     # list_of_distance = []
     # list_of_hop = []
-    for i in range(n_sample):
+    for P in range(P_list[idx][0], P_list[idx][1], res):
 
 
         demand_list = myfunc.make_demand_list(N, m)

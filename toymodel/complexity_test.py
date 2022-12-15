@@ -10,46 +10,7 @@ N = 400
 c = 1
 m = 400
 P = 4000
-# P = int(sys.argv[1])
 
-
-
-naive_implementation_time = []
-modified_algorithm_time = []
-
-
-for i in range(n_experiment):
-
-    np.random.seed(i)
-
-    start = time.time()
-    demand_list = myfunc.make_demand_list(N, m)
-    distance_matrix = myfunc.make_distance_matrix(N)
-    airline_nw = myfunc.make_airline_network(N, P, c, Symmetry = True)
-
-    _, _, _, _, _, _ = myfunc.new_booking_dynamics_v2(demand_list, 
-                                                    airline_nw, 
-                                                    distance_matrix)
-    end = time.time()
-
-    modified_algorithm_time.append(end - start)
-
-
-
-
-    np.random.seed(i)
-
-    start = time.time()
-    demand_list = myfunc.make_demand_list(N, m)
-    distance_matrix = myfunc.make_distance_matrix(N)
-    airline_nw = myfunc.make_airline_network(N, P, c, Symmetry = True)
-
-    _, _, _, _, _, _ = myfunc.booking_dynamics(demand_list, 
-                                                airline_nw, 
-                                                distance_matrix)
-    end = time.time()
-
-    naive_implementation_time.append(end - start)
 
 
 
