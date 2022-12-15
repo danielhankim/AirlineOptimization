@@ -4,7 +4,7 @@ import os
 import sys
 
 DATA_ROOT = '/home/mk139/WorkSpace/AirlineNW/SaveData/'
-DATA_PATH = os.path.join(DATA_ROOT, 'test_Shortest_Path_Percolation')
+DATA_PATH = os.path.join(DATA_ROOT, 'Shortest_Path_Percolation')
 
 N = int(sys.argv[1])
 k = int(sys.argv[2])
